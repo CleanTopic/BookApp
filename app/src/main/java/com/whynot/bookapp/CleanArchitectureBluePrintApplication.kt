@@ -2,6 +2,7 @@ package com.whynot.bookapp
 
 import android.app.Application
 import android.os.Bundle
+import timber.log.Timber
 
 class CleanArchitectureBluePrintApplication: Application() {
     private val bookRepository: BooksRepositoryImpl
@@ -20,7 +21,7 @@ class CleanArchitectureBluePrintApplication: Application() {
     val unBookMarkBookUseCase: UnBookMarkBookUseCase
     get() = UnBookMarkBookUseCase(bookRepository)
 
-    val bookWithStatusMapper: BookWithStatusMapper
+    val bookWithStatusMapper: BookWithStatusMapper()
 
     override fun onCreate(savedInsanceState: Bundle) {
         super.onCreate()
