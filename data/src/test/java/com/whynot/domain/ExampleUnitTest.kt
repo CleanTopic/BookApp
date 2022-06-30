@@ -1,4 +1,4 @@
-package com.whynot.data
+package com.whynot.domain
 
 import org.junit.Test
 
