@@ -7,6 +7,7 @@ import com.whynot.domain.mappers.BookApiResponseMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.reflect.jvm.internal.impl.resolve.ResolutionAnchorProvider
+import com.whynot.domain.common.Result
 
 class BooksRemoteDataSourceImpl(
     private val service: BooksApi,
@@ -16,8 +17,12 @@ class BooksRemoteDataSourceImpl(
         try{
             val response = service.getBooks(author)
             if(response.isSuccessful){
-                return@withContext Result.Success(mapper.toVolumeList(response.body()!))
+                return@withContext Result.Success(mapper.toVolumeList(response.body()!!))
+            } else {
+                return@withContext Result.Error(Exception(response.message()))
             }
+        } catch (e: Exception){
+            return@withContext Result.Error(e)
         }
     }
 
