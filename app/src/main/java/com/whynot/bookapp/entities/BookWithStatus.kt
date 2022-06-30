@@ -5,7 +5,8 @@ data class BookWithStatus(
     val title: String,
     val authors: List<String>,
     val imageUrl: String?,
-    val bookmarked: Any
+    val bookmarked: Any,
+    val status: BookMarkStatus
 )
 
 
