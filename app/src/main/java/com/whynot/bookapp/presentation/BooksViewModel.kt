@@ -33,7 +33,6 @@ class BooksViewModel(
 
     private val _remoteBooks = arrayListOf<Volume>()
 
-    // Getting books with uncle bob as default author :)
     fun getBooks(author: String) {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -42,8 +41,8 @@ class BooksViewModel(
                     _remoteBooks.clear()
                     _remoteBooks.addAll(booksResult.data)
 
-                    val bookmarksFlow = getBookmarksUseCase.invoke()
-                    Flow.collect() { bookmarks ->
+                    val bookMarksFlow = getBookmarksUseCase.invoke()
+                    bookMarksFlow.collect { bookmarks ->
                         books.value = mapper.fromVolumeToBookWithStatus(_remoteBooks, bookmarks)
                         _dataLoading.postValue(false)
                     }
